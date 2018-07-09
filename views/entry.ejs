@@ -1,0 +1,64 @@
+<% include ./partials/header %>
+
+<div class="container">
+     <div class="row" >
+          <div class="col-lg-9" >
+                <div class="row img-thumbnail showProducts" >
+                	  <% var flag = 0; %>
+                      <% products.forEach(function(product){ %>
+                           <% if(flag == 0){ %>
+                           		<div class="col-lg-6 border-right border-bottom" >
+                           			 <p class="pname"> <%= product.product_name %> </p>
+                           			 <span class="btn btn-primary btn-sm editbtn" >Edit</span>
+                           		</div>
+                                <% flag = 1; %>
+
+                           <% } else { %>
+                           		<div class="col-lg-6 border-bottom" >
+                           		 	  <p class="pname"> <%= product.product_name %> </p>
+                           		 	  <span class="btn btn-primary btn-sm editbtn" >Edit</span>
+                           		</div>
+                                <% flag = 0; %>
+
+                           <% } %>
+
+
+          		      <% }); %>
+
+                </div>
+          		
+
+          </div>
+          <div class="col-lg-3" >
+          			
+	               <div class="inputForm" >
+	                   <h4 class="h4" > Add New Product </h4>
+		               <form action="/product_entry" method="POST" >
+		                      <div class="form-group" >
+		                            
+		                      		<input class="form-control" type="text" name="pCode" placeholder="Enter product code" >
+		                      </div>
+		                      <div class="form-group" >
+		                      		<input class="form-control" type="text" name="pName" placeholder="Enter product name" >
+		                      </div>
+		                      <div class="form-group" >
+		                      		<input class="form-control" type="number" name="pPrice" placeholder="Enter product price" >
+		                      </div>
+		                      <div class="form-group" >
+		                      		<input class="form-control" type="number" name="pGst" placeholder="Enter GST applicable on product" >
+		                      </div>
+		                      <div class="form-group" >
+		                      		<input class="btn btn-success" type="submit" value="Submit" >
+		                      </div>
+
+		               </form> 
+		           </div>
+
+          </div>
+          
+     </div>
+     
+</div>
+
+
+<% include ./partials/footer %>
