@@ -1,1 +1,100 @@
-billing page
+<% include ./partials/header %>
+
+<div class="container">
+     <div class="row" >
+ 		  <div class="col-lg-2" ></div>
+ 		  <div class="col-lg-8" >
+ 		                <form action="billing" method="POST" >
+ 		                
+			        	        <div class="row" >
+			        	            <div class="col-8" >
+			 		        	        <div class="form-group" >
+			 		        	        
+			 		        	        <input class="form-control" type="text" name="product" placeholder="Enter Product Name or Product Id" >
+			 		        	        </div>
+		 		        	        </div>
+			 		        	    <div class="col-2">
+			 		        	        <input class="btn btn-success" type="Submit" >
+			 		        	    </div>
+			        	        </div>
+	        	        </form>
+ 		        	    
+
+ 		        	    <div class="container-fluid border rounded" id="productContainer" >
+		 		        	  
+
+		 		        	  <div class="row border-bottom" >
+									     <div class="col-10 border-right" >
+									            <div class="row" >
+									         		 <div class="col-5 border-right" style="padding:8px 0px 3px 7px">
+									         		      <h6> Products </h6>
+									    	         </div>
+									    	         
+									    	         <div class="col-3 border-right" style="padding:8px 0px 3px 7px">
+									         		      <h6> GST </h6>
+									    	         </div>
+									    	         <div class="col-4 " style="padding:8px 0px 3px 7px">
+									    	         	  <h6> Quantity </h6>
+									    	         </div>
+										        </div>
+									     </div>
+									     <div class="col-2" style="padding:8px 0px 3px 7px">
+									     		<h6>Cost</h6>
+									     </div>
+
+								</div>
+								<% var total = 0; %>
+								<% var i = 1; %>
+								<% if( products){ %>
+									<% products.forEach(function(product){ %>
+
+										<div class="row border-top" >
+											     <div class="col-10 border-right" >
+											            <div class="row" >
+											         		 <div class="col-5 border-right" style="padding:8px 0px 3px 7px">
+											         		      <h6> <%= product.item_name %> </h6>
+											    	         </div>
+											    	         
+											    	         <div class="col-3 border-right" style="padding:8px 0px 3px 7px">
+											         		      <h6> <%= product.item_gst %> </h6>
+											    	         </div>
+											    	         <div class="col-4 " style="padding:8px 5px 3px 7px">
+											    	         	  <input class="form-control" type="text"  name="quantity" id="quantity<%= i %>" onblur="submitQuantity('<%= product.item_name %>', '<%= i %>')" value="<%= product.item_quantity %>" >
+											    	         </div>
+												        </div>
+											     </div>
+											     <div class="col-2" style="padding:8px 0px 3px 7px">
+											            <% var cost = Math.round((product.item_price + (product.item_price*product.item_gst/100))*product.item_quantity) %>
+											            <% total = total + cost %>
+											     		<h6> <%= cost %> </h6>
+											     </div>
+
+								     	</div> 
+								     	<% i++; %>
+
+									<% }); %>
+								<% } %>
+								<div class="row border-top" >
+									     <div class="col-10 border-right" style="padding:8px 0px 3px 7px">
+									            <h5> Gross Total </h5>
+										        
+									     </div>
+									     <div class="col-2" style="padding:8px 0px 3px 7px">
+									     		<h5> <%= total %> </h5>
+									     </div>
+
+								</div>
+
+
+ 		        	    </div>
+ 		        	    <button class="btn btn-primary" style="margin-top: 15px; color : #fff;" onclick="Delete()" > Create New Bill </button>
+ 		        	        
+ 		        
+ 		  </div>
+ 		  <div class="col-lg-2" ></div>
+     </div>
+</div>
+
+
+
+<% include ./partials/footer %>
