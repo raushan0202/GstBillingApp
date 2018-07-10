@@ -5,25 +5,54 @@
           <div class="col-lg-9" >
                 <div class="row img-thumbnail showProducts" >
                 	  <% var flag = 0; %>
+                    <% var i = 1; %>
                       <% products.forEach(function(product){ %>
                            <% if(flag == 0){ %>
                            		<div class="col-lg-6 border-right border-bottom" >
                            			 <p class="pname"> <%= product.product_name %> </p>
-                           			 <span class="btn btn-primary btn-sm editbtn" >Edit</span>
+                           			 <span class="btn btn-primary btn-sm editbtn" onclick="makeEditable('<%= product.product_name %>',
+                                 '<%= product.product_code %>','<%= product.product_price %>','<%= product.product_gst %>')" >Edit</span>
                            		</div>
+                                <% i++; %>
                                 <% flag = 1; %>
 
                            <% } else { %>
                            		<div class="col-lg-6 border-bottom" >
                            		 	  <p class="pname"> <%= product.product_name %> </p>
-                           		 	  <span class="btn btn-primary btn-sm editbtn" >Edit</span>
+                           		 	  <span class="btn btn-primary btn-sm editbtn" onclick="makeEditable('<%= product.product_name %>',
+                                 '<%= product.product_code %>','<%= product.product_price %>','<%= product.product_gst %>')" >Edit</span>
                            		</div>
                                 <% flag = 0; %>
+                                <% i++; %>
 
                            <% } %>
 
 
           		      <% }); %>
+                             <!-- The Modal -->
+
+                              <div id="myModal" class="modal">
+
+                                <!-- Modal content -->
+                                <div class="modal-content">
+                                  <span class="close">&times;</span>
+                                  
+                                  <div id="starContainerDiv">
+                                       <div>
+                                           <input id="code" style="margin-top: 2px;" class="form-control" type="text" name="code"  >
+                                           <input id="name" style="margin-top: 2px;" class="form-control" type="text" name="name" >
+                                           <input id="price" style="margin-top: 2px;" class="form-control" type="text" name="price"  >
+                                           <input id="gst" style="margin-top: 2px;" class="form-control" type="text" name="gst">                                           
+
+                                       </div>
+                                       
+                                       <button class="btn btn-outline-success" id="submitButton" style="float:left;margin-top: 5px;" onclick="update()" > 
+
+                                        Submit</button>
+                                  </div>
+                                </div>
+
+                              </div>
 
                 </div>
           		
